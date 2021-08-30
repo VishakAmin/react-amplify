@@ -11,6 +11,7 @@ import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom'
 import Signup from './components/Signup'
 import ConfirmSignup from './components/ConfirmSignup'
 import PrivateRoute from './components/PrivateRoute'
+import ConfirmSignIn from './components/ConfirmSignIn'
 
 
 Amplify.configure(awsExports);
@@ -30,6 +31,9 @@ const App = () => {
       </Route>  
       <Route exact path="/confirm-register">
         <ConfirmSignup/>
+      </Route> 
+      <Route exact path="/confirm-login">
+        <ConfirmSignIn />
       </Route>  
     </Switch>  
   </Router>

@@ -8,17 +8,21 @@ const Signup = () => {
     const [userName, setUserName] = useState("")
     const [userMail, setUserMail] = useState("")
     const [password, setPassword] = useState("")
+    const [userNumber, setUserNumber] = useState("")
+    
     const history = useHistory()
     
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        console.log(userNumber);
         try{
             await Auth.signUp({
                 username:userName,
                 password: password,
                 attributes:{
                     email: userMail,
+                    phone_number: userNumber
                 }
             })
             history.push("/confirm-register")
@@ -59,7 +63,17 @@ const Signup = () => {
                             placeholder='Your Email'
                         />
                     </div>
-                    
+                    <div>
+                        <label htmlFor='number'>Phone Number</label>
+                        <input
+                            onChange= {(e) => setUserNumber(e.target.value)}
+                            required
+                            type='text'
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            id='number'
+                            placeholder='Your Number'
+                        />
+                    </div>
                     <div>
                         <label htmlFor='password'>Password</label>
                         <input

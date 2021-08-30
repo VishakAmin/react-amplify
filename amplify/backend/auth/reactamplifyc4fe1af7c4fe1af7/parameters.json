@@ -1,14 +1,13 @@
 {
-    "identityPoolName": "reactamplify82f3bb4b_identitypool_82f3bb4b",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "reacta82f3bb4b",
-    "userPoolName": "reactamplify82f3bb4b_userpool_82f3bb4b",
+    "resourceNameTruncated": "reactac4fe1af7",
+    "userPoolName": "reactamplifyc4fe1af7_userpool_c4fe1af7",
     "autoVerifiedAttributes": [
         "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "ON",
     "mfaTypes": [
-        "SMS Text Message"
+        "SMS Text Message",
+        "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -31,11 +30,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "reacta82f3bb4b_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "reactac4fe1af7_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "82f3bb4b",
-    "resourceName": "reactamplify82f3bb4b",
-    "authSelections": "identityPoolAndUserPool",
+    "sharedId": "c4fe1af7",
+    "resourceName": "reactamplifyc4fe1af7c4fe1af7",
+    "authSelections": "userPoolOnly",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -48,9 +47,18 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": "{}",
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "breakCircularDependency": true,
+    "permissions": [],
     "dependsOn": []
 }

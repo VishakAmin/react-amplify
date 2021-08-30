@@ -21,7 +21,8 @@ const PrivateRoute = ({children, ...rest}) => {
                 console.log(err);
             }
         }
-    })
+        fetchUser()
+    },[])
 
     if(isLoading){
         return <p>Loading........</p>

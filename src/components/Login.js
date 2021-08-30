@@ -4,16 +4,33 @@ import React,{useState} from 'react';
 
 const Login = () => {
 
-    const [userName, setUserName] = useState("")
+    const [userMail, setuserMail] = useState("")
     const [password, setPassword] = useState("")
     const history = useHistory()
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(userName, password);
+        console.log(userMail, password);
         try{
-            await Auth.signIn(userName, password)
-            history.push("/todo")
+            let user = await Auth.signIn(userMail, password)
+               console.log(user);   
+        //        if (user.challengeName === 'SMS_MFA' ||
+              
+        //        user.challengeName === 'SOFTWARE_TOKEN_MFA') {
+        //        // You need to get the code from the UI inputs
+        //        // and then trigger the following function with a button click
+        //        const code = getCodeFromUserInput();
+        //        // If MFA is enabled, sign-in should be confirmed with the confirmation code
+        //        const loggedUser = await Auth.confirmSignIn(
+        //            user,   // Return object from Auth.signIn()
+        //            code,   // Confirmation code  
+        //            mfaType // MFA Type e.g. SMS_MFA, SOFTWARE_TOKEN_MFA
+        //        );
+        //    } 
+            history.push({
+                        pathname:"/confirm-login",
+                        state:{detail: user}
+            })
         }
         catch(err){
             console.log(err);
@@ -30,13 +47,13 @@ const Login = () => {
 
                 <form onSubmit={handleFormSubmit}>
                     <div>
-                        <label htmlFor='username'>Username</label>
+                        <label htmlFor='mail'>userMail</label>
                         <input
-                            onChange= {(e) => setUserName(e.target.value)}
+                            onChange= {(e) => setuserMail(e.target.value)}
                             required
                             type='text'
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-                            id='username'
+                            id='userMail'
                             placeholder='Your Email'
                         />
                     </div>

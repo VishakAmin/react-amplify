@@ -1,19 +1,21 @@
 import { Auth } from 'aws-amplify';
 import React,{useState} from 'react'
 import { Link, useHistory } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
-
-const ConfirmSignup = () => {
+const ConfirmSignIn = (props) => {
     const [userName, setUserName] = useState("")
     const [authCode, setAuthCode] = useState("")
     const history = useHistory()
+    const location = useLocation();
 
-
+    console.log(location.state.detail)
    const handleFormSubmit = async (e) => {
+       console.log(authCode);
         e.preventDefault();
         try{
-            await Auth.confirmSignUp(userName, authCode)
-            history.push("/login")
+            await Auth.confirmSignIn( authCode, "SMS_MFA")        
+            history.push("/todo")
         }
         catch(err){
             console.log(err);
@@ -28,8 +30,8 @@ const ConfirmSignup = () => {
                     Confirm your account 🔐
                 </h1>
 
-                <form onSubmit={handleFormSubmit}>
-                    <div>
+                <form onSubmit={handleFormSubmit}>           
+                <div>
                         <label htmlFor='username'>Username</label>
                         <input
                             onChange= {(e) => setUserName(e.target.value)}
@@ -39,7 +41,7 @@ const ConfirmSignup = () => {
                             id='username'
                             placeholder='Your Email'
                         />
-                    </div>
+                    </div>    
                     <div>
                         <label htmlFor='password'>Authentication Code</label>
                         <input
@@ -76,4 +78,4 @@ const ConfirmSignup = () => {
     );
 };
 
-export default ConfirmSignup
+export default ConfirmSignIn

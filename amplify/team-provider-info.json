@@ -12,8 +12,24 @@
       "AmplifyAppId": "d3he4nadlk1a99"
     },
     "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3he4nadlk1a99",
+          "type": "manual"
+        }
+      },
+      "function": {
+        "reactamplifye682b460DefineAuthChallenge": {
+          "deploymentBucketName": "amplify-reactamplify-dev-225948-deployment",
+          "s3Key": "amplify-builds/reactamplifye682b460DefineAuthChallenge-4c676a54754251795832-build.zip"
+        },
+        "reactamplifye682b460CreateAuthChallenge": {
+          "deploymentBucketName": "amplify-reactamplify-dev-225948-deployment",
+          "s3Key": "amplify-builds/reactamplifye682b460CreateAuthChallenge-6c7353645045326c4453-build.zip"
+        }
+      },
       "auth": {
-        "reactamplify82f3bb4b": {}
+        "reactamplifyc4fe1af7c4fe1af7": {}
       }
     }
   }
