@@ -1,0 +1,41 @@
+import { Auth } from 'aws-amplify'
+import React,{useState, useEffect} from 'react'
+import { Redirect, Route} from 'react-router-dom'
+import Todo from './Todo'
+
+const PrivateRoute = ({children, ...rest}) => {
+
+    
+    const [signInUser, setSignInUser] = useState(null)
+    const [isLoading, setIsLoadingUser] = useState(true)
+
+    useEffect(() => {
+        let fetchUser = async() => {
+            try{
+                let user =  await Auth.currentAuthenticatedUser();
+                await setSignInUser(user)
+                setIsLoadingUser(false)
+            }
+            catch(err) {
+                setIsLoadingUser(false)
+                console.log(err);
+            }
+        }
+    })
+
+    if(isLoading){
+        return <p>Loading........</p>
+    }
+
+    return (
+        <Route {...rest} render = {({location}) => {
+            return signInUser ? <Todo/>
+            : <Redirect to={{ 
+                pathname: "/login",
+                state: {from: location}
+            }} /> 
+        }} />
+    )
+}
+
+export default PrivateRoute

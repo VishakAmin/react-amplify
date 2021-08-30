@@ -1,31 +1,39 @@
-import { Auth } from 'aws-amplify';
-import React,{useState} from 'react';
- import { Link, useHistory} from "react-router-dom"
+import { Auth } from 'aws-amplify'
+import React,{useState} from 'react'
+import { Link, useHistory} from "react-router-dom"
 
-const Login = () => {
+const Signup = () => {
+
 
     const [userName, setUserName] = useState("")
+    const [userMail, setUserMail] = useState("")
     const [password, setPassword] = useState("")
     const history = useHistory()
+    
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(userName, password);
         try{
-            await Auth.signIn(userName, password)
-            history.push("/todo")
+            await Auth.signUp({
+                username:userName,
+                password: password,
+                attributes:{
+                    email: userMail,
+                }
+            })
+            history.push("/confirm-register")
         }
-        catch(err){
-            console.log(err);
+        catch(error){
+            console.log("Error", error);
         }
-
         
-    };
+    }
+    
     return (
         <div className='h-screen flex bg-gray-bg1'>
             <div className='w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16'>
                 <h1 className='text-2xl font-medium text-primary mt-4 mb-12 text-center'>
-                    Log in to your account 🔐
+                    Sign Up
                 </h1>
 
                 <form onSubmit={handleFormSubmit}>
@@ -37,9 +45,21 @@ const Login = () => {
                             type='text'
                             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
                             id='username'
+                            placeholder='Your Username'
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor='email'>Email</label>
+                        <input
+                            onChange= {(e) => setUserMail(e.target.value)}
+                            required
+                            type='email'
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            id='email'
                             placeholder='Your Email'
                         />
                     </div>
+                    
                     <div>
                         <label htmlFor='password'>Password</label>
                         <input
@@ -56,24 +76,26 @@ const Login = () => {
                         <button
                             className='bg-green py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark'
                         >
-                            Login
+                            Signup
                         </button>
                     </div>
                 </form>
-                <div className="w-full pt-2">
+
+        <div className="w-full pt-2">
           <hr />
-          <p className="text-gray-700 pb-2 pt-2 text-sm">Don't have an account?
+          <p className="text-gray-700 pb-2 pt-2 text-sm">You already have an account?
           <Link
-            to='/'
+            to='/login'
             className="pt-2 text-green font-semibold"
           >
-            {" "}Sign up
+            {" "}Log in
           </Link>
           </p>
         </div>
+
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Login;
+export default Signup

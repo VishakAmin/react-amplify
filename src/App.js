@@ -8,47 +8,31 @@ import awsExports from "./aws-exports";
 import Login from './components/Login'
 import Todo from './components/Todo'
 import { BrowserRouter as Router ,Switch, Route } from 'react-router-dom'
+import Signup from './components/Signup'
+import ConfirmSignup from './components/ConfirmSignup'
+import PrivateRoute from './components/PrivateRoute'
 
 
 Amplify.configure(awsExports);
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  useEffect(() => {
-      AssessLoggedInState()    
-  })
-  const AssessLoggedInState = () => {
-    Auth.currentAuthenticatedUser().then(() => {
-      setLoggedIn(true)
-    }).catch(() => {
-      setLoggedIn(false)
-    })
-  }
-
-  const onSignIn = () => {
-    setLoggedIn(true)
-  }
-
-
-  console.log(loggedIn);
  
   return (
    <Router>
      <Switch>
-      <Route exact path="/">
-        <Todo/>
-      </Route>  
+      <PrivateRoute exact path="/todo">
+      </PrivateRoute>  
        <Route  path ="/login">
-         <Login onSignIn={onSignIn}/> 
+         <Login /> 
       </Route>
-
-    </Switch>
-     
-     
-  
-      {/*  */}
-    </Router>
+      <Route exact path="/">
+        <Signup/>
+      </Route>  
+      <Route exact path="/confirm-register">
+        <ConfirmSignup/>
+      </Route>  
+    </Switch>  
+  </Router>
   )
 }
 
