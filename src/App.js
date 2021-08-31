@@ -12,6 +12,7 @@ import Signup from './components/Signup'
 import ConfirmSignup from './components/ConfirmSignup'
 import PrivateRoute from './components/PrivateRoute'
 import ConfirmSignIn from './components/ConfirmSignIn'
+import ForgotPassword from './components/ForgotPassword'
 
 
 Amplify.configure(awsExports);
@@ -32,8 +33,8 @@ const App = () => {
       <Route exact path="/confirm-register">
         <ConfirmSignup/>
       </Route> 
-      <Route exact path="/confirm-login">
-        <ConfirmSignIn />
+      <Route exact path="/forgot-password">
+        <ForgotPassword />
       </Route>  
     </Switch>  
   </Router>

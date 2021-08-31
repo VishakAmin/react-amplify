@@ -18,14 +18,15 @@
     }
   },
   "auth": {
-    "reactamplifyc4fe1af7c4fe1af7": {
+    "reactamplify519b2b13519b2b13": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "loginMechanisms": [
-          "EMAIL"
+          "EMAIL",
+          "PREFERRED_USERNAME"
         ],
         "signupAttributes": [
           "EMAIL"
@@ -49,16 +50,5 @@
       "type": "manual"
     }
   },
-  "function": {
-    "reactamplifye682b460DefineAuthChallenge": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "reactamplifye682b460CreateAuthChallenge": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  }
+  "function": {}
 }
